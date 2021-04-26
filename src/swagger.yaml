@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: MyApp-API
+  description: MyApp info
+tags:
+  - name: Room
+    description: Actions related to manipulating with rooms
+basePath: '/api/v1'
+paths:
+  /room:
+    get:
+      tags:
+        - Room
+      summary: Get rooms 
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: query
+          description: from date and to date
+          required: true  
+          schema:
+            $ref: '#/definitions/RoomObject'
+      responses:
+        '200':
+          description: Rooms info
+        '400':
+          description: Operation error
+    post:
+      tags:
+        - Room
+      summary: Reserve room
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: roomId, fromDate, toDate
+          required: true  
+          schema:
+            $ref: '#/definitions/RoomReserveObject'
+      responses:
+        '200':
+          description: Rooms info
+        '400':
+          description: Operation error       
+  
+definitions:
+  RoomReserveObject:
+    type: object
+    required:
+      - fromDate
+      - toDate
+      - roomId
+    properties:
+      fromDate:
+        type: string
+        example: 2021-04-21
+      toDate:
+        type: string
+        example: 2021-04-25 
+      roomId:
+        type: number
+        example: 1
+  RoomObject:
+    type: object
+    required:
+      - fromDate
+      - toDate
+    properties:
+      fromDate:
+        type: string
+        example: 2021-04-21
+      toDate:
+        type: string
+        example: 2021-04-25 

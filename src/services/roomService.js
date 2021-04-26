@@ -30,7 +30,7 @@ module.exports = function makeRoomService({ models }) {
       throw badRequest({room: 'Room reserved'})
      }    
 
-     for (let i = new Date(fromDate.getDate()); i <= toDate.getDate(); i.setDate(i.getDate() + 1)) {
+     for (let i = fromDate; i <= toDate; new Date(i.setDate(i.getDate() + 1))) {
       await ReservedRoom.create({roomId, reservedDate: i});
      };
   },

@@ -10,7 +10,7 @@ module.exports = function makeRoomService({ models }) {
    async getRooms(fromDate, toDate) {
      const reservedRooms = await ReservedRoom.findAll({ where: {
       reservedDate: {
-        [Op.notIn]: [fromDate, toDate]
+        [Op.notBetween]: [fromDate, toDate]
       }
      }});
      const ids = reservedRooms.map(item => item.roomId);

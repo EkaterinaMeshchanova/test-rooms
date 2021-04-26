@@ -23,7 +23,7 @@ module.exports = function makeRoomService({ models }) {
     const reservedRooms = await ReservedRoom.findAll({ where: {
       roomId,
       reservedDate: {
-        [Op.notIn]: [fromDate, toDate]
+        [Op.notBetween]: [fromDate, toDate]
       }
      }});
      if (reservedRooms.length) {

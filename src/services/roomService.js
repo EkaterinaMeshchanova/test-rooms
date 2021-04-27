@@ -10,7 +10,7 @@ module.exports = function makeRoomService({ models }) {
    async getRooms(fromDate, toDate) {
      const reservedRooms = await ReservedRoom.findAll({ where: {
       reservedDate: {
-        [Op.notBetween]: [fromDate, toDate]
+        [Op.between]: [fromDate, toDate]
       }
      }});
      const ids = reservedRooms.map(item => item.roomId);
@@ -23,9 +23,10 @@ module.exports = function makeRoomService({ models }) {
     const reservedRooms = await ReservedRoom.findAll({ where: {
       roomId,
       reservedDate: {
-        [Op.notBetween]: [fromDate, toDate]
+        [Op.between]: [fromDate, toDate]
       }
      }});
+
      if (reservedRooms.length) {
       throw badRequest({room: 'Room reserved'})
      }    
@@ -34,7 +35,6 @@ module.exports = function makeRoomService({ models }) {
       await ReservedRoom.create({roomId, reservedDate: i});
      };
   },
- 
   };
 };
 

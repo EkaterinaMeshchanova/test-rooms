@@ -15,7 +15,6 @@ function makeApp({ rootRouter }) {
     next();
   });
 
-  app.use(cors({ origin: '*' }));
   app.use(logger('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
